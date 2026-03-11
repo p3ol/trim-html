@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@poool/trim-html": ["./src/index.ts"],
+    },
+    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "lib": ["esnext"],
+    "target": "es6",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

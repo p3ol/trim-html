@@ -1,25 +1,59 @@
 {
-  "name": "trim-html",
-  "version": "0.1.9",
-  "homepage": "https://github.com/brankosekulic/trimHtml",
+  "name": "@poool/trim-html",
+  "version": "1.0.0",
+  "type": "module",
+  "sideEffects": false,
+  "homepage": "https://github.com/p3ol/trim-html",
+  "author": "Ugo Stephant <ugo@poool.fr>",
+  "contributors": [
+    "Branko Sekulic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:p3ol/trim-html"
+  },
   "keywords": [
     "trim",
     "html",
     "tags",
     "string"
   ],
-  "description": "trim html...",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:brankosekulic/trimHtml"
+  "description": "Cutting a HTML String without breaking HTML Tags",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
   "devDependencies": {
-    "nodeunit": "~0.9.0"
+    "@poool/eslint-config": "5.0.10",
+    "@types/node": "25.2.1",
+    "commit-and-tag-version": "12.6.1",
+    "eslint": "9.39.2",
+    "tsdown": "0.21.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.54.0",
+    "vite": "7.3.1",
+    "vitest": "4.0.18"
   },
   "scripts": {
-    "test": "nodeunit tests/index.js"
+    "clean": "rm -rf ./dist || true",
+    "build": "yarn clean && yarn build:code && yarn build:types",
+    "build:code": "tsdown",
+    "build:types": "tsc --project ./tsconfig.build.json",
+    "test": "vitest run"
   },
-  "author": "Branko Sekulic",
-  "license": "MIT"
+  "license": "MIT",
+  "targets": [
+    "chrome109",
+    "edge138",
+    "firefox140",
+    "safari18",
+    "opera80",
+    "node20"
+  ],
+  "packageManager": "yarn@4.13.0"
 }
