@@ -10,8 +10,6 @@ The API is unchanged, but it's now esm first, everything is now typed and it all
 
 ## Installation ##
 
-### Node.js ###
-
 ```bash
   yarn add @poool/trim-html
 ```
