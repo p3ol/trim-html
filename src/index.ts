@@ -6,7 +6,7 @@ export interface TrimHtmlOptions {
   moreLink?: string;
   moreText?: string;
   preserveWhiteSpace?: boolean;
-  charRegex?: RegExp;
+  spaceChars?: string[];
 }
 
 export function trimHtml (html: string, options?: TrimHtmlOptions) {
@@ -19,6 +19,14 @@ export function trimHtml (html: string, options?: TrimHtmlOptions) {
   const moreLink = options.moreLink ?? '';
   const moreText = options.moreText ?? '»';
   const preserveWhiteSpace = options.preserveWhiteSpace || false;
+  const spaceChars = options.spaceChars ?? [
+    // Normal space
+    ' ',
+    // Insecable space (&#xA0;)
+    ' ',
+    // Han script special spaces
+    '、', '。',
+  ];
 
   const arr = html.replace(/</g, '\n<')
     .replace(/>/g, '>\n')
@@ -59,16 +67,16 @@ export function trimHtml (html: string, options?: TrimHtmlOptions) {
       } else if ((sum + charArr.length) >= limit) {
         cut = limit - sum;
 
-        if (charArr[cut - 1] === ' ') {
+        if (spaceChars.includes(charArr[cut - 1])) {
           while (cut){
             cut -= 1;
 
-            if(charArr[cut - 1] !== ' '){
+            if(!spaceChars.includes(charArr[cut - 1])){
               break;
             }
           }
         } else {
-          add = charArr.slice(cut).indexOf(' ');
+          add = charArr.slice(cut).findIndex(c => spaceChars.includes(c));
 
           // break on half of word
           if (!wordBreak) {
@@ -125,7 +133,7 @@ export function trimHtml (html: string, options?: TrimHtmlOptions) {
     html: arr
       .join('\n')
       .replace(/\n/g, ''),
-    more: more,
+    more,
   };
 }
 

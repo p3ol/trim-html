@@ -5,10 +5,10 @@ import { test, expect } from 'vitest';
 
 import { trimHtml } from '.';
 
-const getFixture = async (name: string) => fsp.readFile(
+const getFixture = async (name: string) => (await fsp.readFile(
   path.resolve(`./tests/fixtures/${name}`),
   'utf-8'
-);
+)).trim();
 
 test('should work with basic input', async () => {
   expect(trimHtml(
@@ -41,9 +41,9 @@ test('should allow word break if specified', () => {
   ).html).toBe('<div>test t...</div>');
 });
 
-test.skip('should allow utf8 chars', async () => {
+test('should allow utf8 special spaces like 、 and 。', async () => {
   expect(trimHtml(
-    await getFixture('inputs/japanese.html'),
-    { limit: 10 }
-  ).html).toBe(await getFixture('outputs/japanese.html'));
+    await getFixture('inputs/han.html'),
+    { limit: 10, wordBreak: true }
+  ).html).toBe(await getFixture('outputs/han.html'));
 });
