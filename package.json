@@ -44,7 +44,9 @@
     "build": "yarn clean && yarn build:code && yarn build:types",
     "build:code": "tsdown",
     "build:types": "tsc --project ./tsconfig.build.json",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint --max-warnings=0 .",
+    "prepack": "yarn lint && yarn build && yarn test"
   },
   "license": "MIT",
   "targets": [
