@@ -7,3 +7,5 @@
 tests
 *.test.ts
 node_modules
+*.tsbuildinfo
+tsconfig.build.json
