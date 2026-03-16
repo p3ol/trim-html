@@ -46,7 +46,8 @@
     "build:types": "tsc --project ./tsconfig.build.json",
     "test": "vitest run",
     "lint": "eslint --max-warnings=0 .",
-    "prepack": "yarn lint && yarn build && yarn test"
+    "prepack": "yarn lint && yarn build && yarn test",
+    "release": "commit-and-tag-version"
   },
   "license": "MIT",
   "targets": [
